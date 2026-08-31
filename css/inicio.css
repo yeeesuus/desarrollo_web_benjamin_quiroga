@@ -3,7 +3,7 @@
 }
 
 /*
-    
+    Estilo del container
 */
 .container {
     border: 1px solid var(--color-borde);
@@ -15,6 +15,9 @@
     background-color: #dbdbdb;
 }
 
+/*
+    Alineamiento del titulo
+*/
 #titulo {
     text-align: center;
 }
