@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Form Validation</title>
+    <title>Registro de usuario</title>
 </head>
 <body>
     <div class="main-container">
@@ -13,11 +13,11 @@
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" minlength="4" required><br>
 
-            <label for="rut">RUT</label>
+            <label for="rut">RUT (12.345.678-9)</label>
             <input type="text" name="rut" id="rut" minlength="8" required><br>
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" minlength="8" required><br>
+            <input type="email" name="email" id="email" minlength="15" required><br>
 
             <label for="telefono">Telefono</label>
             <input type="text" name="telefono" id="telefono" minlength="8" required><br>
@@ -33,9 +33,10 @@
             <label for="calle">Calle y numero</label>
             <input type="text" name="calle" id="calle" minlength="10" required><br>
 
-            <button id="submit-btn" type="button">Enviar</button>
+            <button id="submit-btn" type="button">Registrarme</button>
         </form>
     </div>
     <script src="js/select.js"></script>
+    <script src="js/validation_registro.js"></script>
 </body>
 </html>
