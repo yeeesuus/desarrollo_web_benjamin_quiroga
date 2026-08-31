@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+    <div class="main-container">
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
+        </div>
+        <form name="myForm" method="post" enctype="multipart/form-data">
+            <label for="tipo">Tipo</label>
+            <input type="tipo" name="tipo" id="tipo" minlength="4" required><br>
+
+            <label for="nombre">Nombre</label>
+            <input type="nombre" name="nombre" id="nombre" minlength="8" required><br>
+
+            <label for="lugar">Lugar</label>
+            <input type="lugar" name="lugar" id="lugar" minlength="8" required><br>
+
+            <label for="fecha">Fecha y hora</label>
+            <input type="fecha" name="fecha" id="fecha" minlength="8" required><br>
+
+            <label for="foto">Foto o video</label>
+            <input type="foto" required name="foto" id="foto"><br>
+
+            <button id="submit-btn" type="button">Informar</button>
+        </form>
+    </div>
+</body>
+</html>
