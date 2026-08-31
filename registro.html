@@ -1,4 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <h1>Registro de voluntarios</h1>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+    <div class="main-container">
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
+        </div>
+        <form name="myForm" method="post" enctype="multipart/form-data">
+            <label for="nombre">Nombre</label>
+            <input type="nombre" name="nombre" id="nombre" minlength="4" required><br>
+
+            <label for="rut">RUT</label>
+            <input type="text" name="rut" id="rut" minlength="8" required><br>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" minlength="8" required><br>
+
+            <label for="telefono">Telefono</label>
+            <input type="text" name="telefono" id="telefono" minlength="8" required><br>
+
+            <label for="select-region">Region</label>
+            <select name="select-region" id="select-region" required>
+                <option value="">Seleccione una region</option>
+            </select><br>
+
+            <label for="comuna">Comuna</label>
+            <input type="comuna" name="comuna" id="comuna" minlength="4" required><br>
+
+            <label for="calle">Calle y numero</label>
+            <input type="calle" name="calle" id="calle" minlength="15" required><br>
+
+            <button id="submit-btn" type="button">Enviar</button>
+        </form>
+    </div>
+</body>
 </html>
