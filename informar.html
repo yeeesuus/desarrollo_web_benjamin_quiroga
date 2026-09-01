@@ -14,7 +14,7 @@
             <input type="text" name="tipo" id="tipo" minlength="4" required><br>
 
             <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" minlength="8" required><br>
+            <input type="text" name="nombre" id="nombre" minlength="4" required><br>
 
             <label for="lugar">Lugar</label>
             <input type="text" name="lugar" id="lugar" minlength="8" required><br>
@@ -22,11 +22,12 @@
             <label for="fecha">Fecha y hora</label>
             <input type="datetime-local" name="fecha" id="fecha" required><br>
 
-            <label for="foto">Foto o video</label>
-            <input type="file" name="foto" id="foto" accept="image/*, video/*" required><br>
+            <label for="files">Foto o video</label>
+            <input type="file" name="files" id="files" accept="image/*, video/*" multiple required><br>
 
             <button id="submit-btn" type="button">Informar</button>
         </form>
     </div>
+    <script src="/js/validation_informar.js"></script>
 </body>
 </html>
