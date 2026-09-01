@@ -1,0 +1,55 @@
+:root {
+    --color-borde: #dbdbdb;
+}
+
+.main-container {
+    border: 1px solid var(--color-borde);
+    max-width: 500px;
+    margin: 2% auto;
+    padding: 2rem;
+    padding-top: .5rem;
+    background-color: #dbdbdb;
+}
+
+h1 {
+    text-align: center;
+}
+
+.filtros {
+    display: flex;
+    flex-direction: column;
+}
+
+.filtros label {
+    margin-top: 10px;
+}
+
+.filtros select {
+    padding: 5px;
+}
+
+.avistamientos {
+    margin-top: 20px;
+}
+
+.avistamiento {
+    border: 1px solid var(--color-borde);
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 15px;
+}
+
+.avistamiento img {
+    width: 220px;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    margin: 1opx auto;
+}
+
+.paginación {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+}
