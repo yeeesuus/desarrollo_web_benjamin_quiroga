@@ -1,0 +1,39 @@
+:root {
+    --color-borde: #dbdbdb;
+}
+
+.main-container {
+    border: 1px solid var(--color-borde);
+    max-width: 700px;
+    margin: 2% auto;
+    padding: 2rem;
+    padding-top: .5rem;
+    background-color: #dbdbdb;
+}
+
+h1 {
+    text-align: center;
+}
+
+.estadistica {
+    border: 1px solid var(--color-borde);
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 20px;
+}
+
+.estadistica h2 {
+    text-align: center;
+}
+
+.estadistica img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 10px auto;
+}
+
+.main-container > a {
+    display: block;
+    text-align: center;
+}
