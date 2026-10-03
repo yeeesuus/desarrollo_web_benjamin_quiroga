@@ -10,7 +10,7 @@
             <h2 id="val-msg"></h2>
             <ul id="val-list"></ul>
         </div>
-        <form name="myForm" method="post" enctype="multipart/form-data">
+        <form name="myForm" method="post" action="{{ url_for('registro') }}">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" minlength="4" required><br>
 
@@ -26,10 +26,16 @@
             <label for="select-region">Region</label>
             <select name="select-region" id="select-region" required>
                 <option value="">Seleccione una region</option>
+
+                {% for region in regiones %}
+                    <option value="{{ region.id }}">{{ region.nombre }}</option>
+                {% endfor %}
             </select><br>
 
             <label for="comuna">Comuna</label>
-            <input type="text" name="comuna" id="comuna" minlength="4" required><br>
+            <select name="comuna" id="comuna" required>
+                <option value="">Seleccione una comuna</option>
+            </select><br>
 
             <label for="calle">Calle y numero</label>
             <input type="text" name="calle" id="calle" minlength="10" required><br>
@@ -37,7 +43,7 @@
             <button id="submit-btn" type="button">Registrarme</button>
         </form>
     </div>
-    <script src="{{ url_for('static', filename='js/select.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/valdation_registro.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation_registro.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/comunas.js') }}"></script>
 </body>
 </html>

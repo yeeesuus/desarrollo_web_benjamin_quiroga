@@ -122,30 +122,14 @@ const validateForm = () => {
         // hacemos visible el mensaje de validacion
         validationBox.hidden = false;
     } else{
-        // ocultamos el formulario
-        myForm.style.display = "none";
-
-        // mensaje de éxito
-        validationMessageElem.innerText = "¡Registro válido! Volviendo al inicio";
-        validationListElem.textContent = "";
-
-        // aplicamos diseño del éxito
-        validationBox.style.backgroundColor = "#ddffdd";
-        validationBox.style.borderLeftColor = "#4CAF50";
-
-        // agregamos el boton para volver al inicio.html
-        let returnButton = document.createElement("button");
-        returnButton.innerText = "Volver";
-        returnButton.addEventListener("click", () => {
-            window.location.href = "inicio.html";
-        });
-
-        validationBox.appendChild(returnButton); //agregar boton de volver
-
-        // hacemos visible el mensaje de validación
-        validationBox.hidden = false;
+        return true;
     }  
 };
 
 let submitBtn = document.getElementById("submit-btn");
-submitBtn.addEventListener("click", validateForm);
+
+submitBtn.addEventListener("click", () => {
+    if (validateForm()) {
+        document.forms["myForm"].submit();
+    }
+});
