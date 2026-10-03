@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <title>Informar avistamiento</title>
-    <link rel="stylesheet" href="css/informar.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informar.css') }}">
 </head>
 <body>
     <div class="main-container">
@@ -29,6 +29,6 @@
             <button id="submit-btn" type="button">Informar</button>
         </form>
     </div>
-    <script src="/js/validation_informar.js"></script>
+    <script src="{{ url_for('static', filename='js/valdation_informar.js') }}"></script>
 </body>
 </html>

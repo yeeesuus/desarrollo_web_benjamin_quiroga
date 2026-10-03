@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <title>Estadísticas</title>
-    <link rel="stylesheet" href="css/estadisticas.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estadisticas.css') }}">
 </head>
 <body>
     <div class="main-container">
@@ -12,27 +12,27 @@
 
         <section class="estadistica">
             <h3>Usuarios registrados por mes</h3>
-            <img src="im/Usuarios registrados por mes (año 2025).png" alt="Gráfico de usuarios registrados por mes (año 2025)">
+            <img src="{{ url_for('static', filename='im/Usuarios registrados por mes (año 2025).png') }}" alt="Gráfico de usuarios registrados por mes (año 2025)">
         </section>
 
         <h2>Estadísticas de avistamientos de aves</h2>
 
         <section class="estadistica">
             <h3>Avistamientos de aves por tipo</h3>
-            <img src="im/Avistamientos de aves por tipo.png" alt="Gráfico de avistamientos por tipo de ave">
+            <img src="{{ url_for('static', filename='im/Avistamientos de aves por tipo.png') }}" alt="Gráfico de avistamientos por tipo de ave">
         </section>
 
         <section class="estadistica">
             <h3>Avistamientos de aves por región</h3>
-            <img src="im/Avistamientos de aves por región.png" alt="Gráfico de avistamientos por región">
+            <img src="{{ url_for('static', filename='im/Avistamientos de aves por región.png') }}" alt="Gráfico de avistamientos por región">
         </section>
 
         <section class="estadistica">
             <h3>Avistamientos registrados por mes</h3>
-            <img src="im/Avistamientos de aves por mes (año 2025).png" alt="Gráfico de avistamientos registrados por mes (año 2025)">
+            <img src="{{ url_for('static', filename='im/Avistamientos de aves por mes (año 2025).png') }}" alt="Gráfico de avistamientos registrados por mes (año 2025)">
         </section>
 
-        <a href="inicio.html">
+        <a href="{{ url_for('inicio') }}">
             <button type="button">Volver</button>
         </a>
     </div>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy import create_engine, text
 
 app = Flask(__name__)
@@ -9,11 +9,23 @@ engine = create_engine(DATABASE_URL)
 
 @app.route("/")
 def inicio():
-    with engine.connect() as connection:
-        resultado = connection.execute(text("SELECT COUNT(*) FROM ave"))
-        cantidad = resultado.scalar()
+    return render_template("inicio.html")
 
-    return f"Conexión exitosa. Hay {cantidad} aves =D"
+@app.route("/registro")
+def registro():
+    return render_template("registro.html")
+
+@app.route("/informar")
+def informar():
+    return render_template("informar.html")
+
+@app.route("/listado")
+def listado():
+    return render_template("listado.html")
+
+@app.route("/estadisticas")
+def estadisticas():
+    return render_template("estadisticas.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

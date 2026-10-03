@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <title>Registro de usuario</title>
-    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
 </head>
 <body>
     <div class="main-container">
@@ -37,7 +37,7 @@
             <button id="submit-btn" type="button">Registrarme</button>
         </form>
     </div>
-    <script src="js/select.js"></script>
-    <script src="js/validation_registro.js"></script>
+    <script src="{{ url_for('static', filename='js/select.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/valdation_registro.js') }}"></script>
 </body>
 </html>
