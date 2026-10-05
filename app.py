@@ -71,6 +71,22 @@ def registro():
                 comuna_id = comuna_id,
                 calle = calle
             )
+
+        with engine.begin() as connection:
+            connection.execute(
+                text("""
+                    INSERT INTO voluntario
+                        (nombre, email, telefono, fecha_registro, comuna_id)
+                    VALUES
+                        (:nombre, :email, :telefono, NOW(), :comuna_id)
+                """),
+                {
+                    "nombre": nombre,
+                    "email": email,
+                    "telefono": telefono,
+                    "comuna_id": comuna_id
+                }
+            )
     
     return render_template("registro.html", regiones=regiones)
 
