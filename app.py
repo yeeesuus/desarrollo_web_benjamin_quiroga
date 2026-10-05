@@ -53,8 +53,8 @@ def registro():
                 )
                 comuna = resultado.fetchone()
 
-        if comuna is None:
-            errores.append("La comuna seleccionada no existe.")
+            if comuna is None:
+                errores.append("La comuna seleccionada no existe.")
 
         if not validations.validate_calle(calle):
             errores.append("La calle y el número deben tener mínimo 10 caracteres.")
