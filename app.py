@@ -87,7 +87,8 @@ def registro():
                     "comuna_id": comuna_id
                 }
             )
-    
+        return render_template("registro_exitoso.html")
+
     return render_template("registro.html", regiones=regiones)
 
 @app.route("/comunas/<int:region_id>")
