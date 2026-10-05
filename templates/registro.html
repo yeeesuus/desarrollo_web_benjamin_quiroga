@@ -6,22 +6,34 @@
 </head>
 <body>
     <div class="main-container">
+        {% if errores %}
+        <div id="val-box">
+            <h2 id="val-msg">Los siguientes campos son inválidos:</h2>
+            <ul id="val-list">
+                {% for error in errores %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
         <div id="val-box" hidden>
             <h2 id="val-msg"></h2>
             <ul id="val-list"></ul>
         </div>
+        {% endif %}
+
         <form name="myForm" method="post" action="{{ url_for('registro') }}">
             <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" minlength="4" required><br>
+            <input type="text" name="nombre" id="nombre" minlength="4" required value="{{ nombre|default('') }}"><br>
 
             <label for="rut">RUT (12.345.678-9)</label>
-            <input type="text" name="rut" id="rut" minlength="8" required><br>
+            <input type="text" name="rut" id="rut" minlength="8" required value="{{ rut|default('') }}"><br>
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" minlength="15" required><br>
+            <input type="email" name="email" id="email" minlength="15" required value="{{ email|default('') }}"><br>
 
             <label for="telefono">Telefono</label>
-            <input type="text" name="telefono" id="telefono" minlength="8" required><br>
+            <input type="text" name="telefono" id="telefono" minlength="8" required value="{{ telefono|default('') }}"><br>
 
             <label for="select-region">Region</label>
             <select name="select-region" id="select-region" required>
@@ -38,12 +50,12 @@
             </select><br>
 
             <label for="calle">Calle y numero</label>
-            <input type="text" name="calle" id="calle" minlength="10" required><br>
+            <input type="text" name="calle" id="calle" minlength="10" required value="{{ calle|default('') }}"><br>
 
             <button id="submit-btn" type="button">Registrarme</button>
         </form>
     </div>
-    <script src="{{ url_for('static', filename='js/validation_registro.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation_registro.js') }}"></script> 
     <script src="{{ url_for('static', filename='js/comunas.js') }}"></script>
 </body>
 </html>
