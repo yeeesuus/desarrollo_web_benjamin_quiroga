@@ -6,16 +6,41 @@
 </head>
 <body>
     <div class="main-container">
+        {% if errores %}
+        <div id="val-box">
+            <h2 id="val-msg">Los siguientes campos son inválidos:</h2>
+            <ul id="val-list">
+                {% for error in errores %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
         <div id="val-box" hidden>
             <h2 id="val-msg"></h2>
             <ul id="val-list"></ul>
         </div>
+        {% endif %}
         <form name="myForm" method="post" enctype="multipart/form-data">
-            <label for="tipo">Tipo</label>
-            <input type="text" name="tipo" id="tipo" minlength="4" required><br>
+            <label for="voluntario">Voluntario</label>
+            <select name="voluntario" id="voluntario" required>
+                <option value="">Seleccione un voluntario</option>
+                {% for voluntario in voluntarios %}
+                    <option value="{{ voluntario.id }}">
+                        {{ voluntario.nombre }}
+                    </option>
+                {% endfor %}
+            </select><br>
 
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" minlength="4" required><br>
+            <label for="nombre">Nombre del ave</label>
+            <select name="nombre" id="nombre" required>
+                <option value="">Seleccione un ave</option>
+                {% for ave in aves %}
+                    <option value="{{ ave.id }}">
+                        {{ ave.nombre }}
+                    </option>
+                {% endfor %}
+            </select><br>
 
             <label for="lugar">Lugar</label>
             <input type="text" name="lugar" id="lugar" minlength="8" required><br>
@@ -29,6 +54,6 @@
             <button id="submit-btn" type="button">Informar</button>
         </form>
     </div>
-    <script src="{{ url_for('static', filename='js/valdation_informar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation_informar.js') }}"></script> 
 </body>
 </html>

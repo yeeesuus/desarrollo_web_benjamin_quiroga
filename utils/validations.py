@@ -32,3 +32,23 @@ def validate_calle(calle):
     if not calle:
         return False
     return len(calle.strip()) >= 10
+
+def validate_lugar(lugar):
+    if not lugar:
+        return False
+    return len(lugar.strip()) >= 8
+
+def validate_fecha(fecha):
+    if not fecha:
+        return False
+    return True
+
+def validate_voluntario(voluntario_id):
+    if not voluntario_id:
+        return False
+    return voluntario_id.isdigit()
+
+def validate_ave(ave_id):
+    if not ave_id:
+        return False
+    return ave_id.isdigit()
