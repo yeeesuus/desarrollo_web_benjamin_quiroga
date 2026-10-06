@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 def validate_name(nombre):
     if not nombre:
         return False
@@ -41,7 +43,15 @@ def validate_lugar(lugar):
 def validate_fecha(fecha):
     if not fecha:
         return False
-    return True
+    try:
+        fecha_avistamiento = datetime.strptime(fecha, "%Y-$m-%DT%H:M")
+    except ValueError:
+        return False
+
+    fecha_actual = datetime.now()
+    fecha_minima= fecha_actual - timedelta(days=365)
+    
+    return fecha_minima <= fecha_avistamiento <= fecha_actual
 
 def validate_voluntario(voluntario_id):
     if not voluntario_id:

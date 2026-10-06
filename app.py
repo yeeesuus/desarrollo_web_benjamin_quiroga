@@ -188,10 +188,22 @@ def informar():
                     errores.append("El lugar debe tener como mínimo 8 caracteres.")
 
         if not validations.validate_fecha(fecha):
-                    errores.append("Tiene que ingresar una fecha y hora.")
+                    errores.append("La fecha tiene que estar dentro del último año.")
 
         if not archivos or all(archivo.filename == "" for archivo in archivos):
                     errores.append("Tiene que seleccionar al menos un archivo.")
+        else:
+            extensiones_permitidas = {
+                ".jpg", ".jpeg", ".png", ".gif", ".webp",
+                ".mp4", ".webm", ".ogg"
+            }
+
+            for archivo in archivos:
+                nombre_archivo = secure_filename(archivo.filename)
+                extension = os.path.splitext(nombre_archivo)[1].lower()
+
+                if extension not in extensiones_permitidas:
+                     errores.append(f"El archivo {archivo.filename} no tiene un formato permitido")
 
         if errores:
             return render_template(
