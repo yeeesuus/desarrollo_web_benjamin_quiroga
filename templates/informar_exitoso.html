@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Avistamiento registrado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informar.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <h1 id="titulo">Avistamiento registrado correctamente</h1>
+
+        <p>El avistamiento y sus archivos fueron registrados correctamente</p>
+
+        <a href="{{ url_for('informar') }}">
+            <button type="button">Informar otro avistamiento</button>
+        </a>
+
+        <a href="{{ url_for('inicio') }}">
+            <button type="button">Volver al inicio</button>
+        </a>
+    </div>
+</body>
+</html>

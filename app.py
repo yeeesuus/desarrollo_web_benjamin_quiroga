@@ -246,7 +246,8 @@ def informar():
                             "avistamiento_id": avistamiento_id
                         }
                     )
-
+        return render_template("informar_exitoso.html")
+    
     return render_template("informar.html", voluntarios=voluntarios, aves=aves)
 
 @app.route("/listado")
