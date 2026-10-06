@@ -15,7 +15,28 @@ UPLOAD_FOLDER = "static/uploads"
 
 @app.route("/")
 def inicio():
-    return render_template("inicio.html")
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    avistamiento.id,
+                    ave.nombre AS ave,
+                    voluntario.nombre AS voluntario,
+                    avistamiento.lugar,
+                    avistamiento.fecha_hora
+                FROM avistamiento
+                JOIN ave
+                    ON avistamiento.ave_id = ave.id
+                JOIN voluntario
+                    ON avistamiento.voluntario_id = voluntario.id
+                ORDER BY avistamiento.id DESC
+                LIMIT 2
+            """)
+        )
+
+        avistamientos = resultado.fetchall()
+
+    return render_template("inicio.html", avistamientos=avistamientos)
 
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
