@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Detalle del avistamiento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/listado.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Detalle del avistamiento</h1>
+        
+        <p>
+            <strong>Ave:</strong>
+            {{ avistamiento.ave }}
+        </p>
+
+        <p>
+            <strong>Voluntario:</strong>
+            {{ avistamiento.voluntario }}
+        </p>
+
+        <p>
+            <strong>Lugar:</strong>
+            {{ avistamiento.lugar }}
+        </p>
+
+        <p>
+            <strong>Feche:</strong>
+            {{ avistamiento.fecha_hora.strftime("%d/%m/%Y %H:%M") }}
+        </p>
+
+        {% if avistamiento.descripcion %}
+        <p>
+            <strong>Descripcion:</strong>
+            {{ avistamiento.descripcion }}
+        </p>
+        {% endif %}
+
+        <h2>Archivos</h2>
+
+        {% for archivo in archivos %}
+
+            {% set ruta = archivo.ruta_archivo.replace("\\", "/") %}
+            {% set ruta = ruta.replace("static/", "") %}
+
+            {% if archivo.nombre_archivo.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')) %}
+
+                <img src="{{ url_for('static', filename=ruta) }}" alt="{{ archivo.nombre_archivo }}" width="400">
+
+            {% elif archivo.nombre_archivo.lower().endswith(('.mp4', '.webm', '.ogg')) %}
+
+                <video width="500" controls>
+                    <source src="{{ url_for('static', filename=ruta) }}">
+                </video>
+            
+            {% endif %}
+        {% endfor %}
+
+        <br></br>
+
+        <a href="{{ url_for('listado') }}">
+            <button type="button">Volver al listado</button>
+        </a>
+    </div>
+</body>
+</html>

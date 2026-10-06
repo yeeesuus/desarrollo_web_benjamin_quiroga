@@ -230,7 +230,90 @@ def informar():
 
 @app.route("/listado")
 def listado():
-    return render_template("listado.html")
+    pagina = request.args.get("pagina", 1, type=int)
+
+    if pagina < 1:
+        pagina = 1
+
+    por_pagina = 4
+    offset = (pagina - 1) * por_pagina
+
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    avistamiento.id,
+                    ave.nombre AS ave,
+                    voluntario.nombre AS voluntario,
+                    avistamiento.lugar,
+                    avistamiento.fecha_hora
+                FROM avistamiento
+                JOIN ave
+                    ON avistamiento.ave_id = ave.id
+                JOIN voluntario
+                    ON avistamiento.voluntario_id = voluntario_id
+                ORDER BY avistamiento.fecha_hora DESC 
+                LIMIT :por_pagina OFFSET :offset     
+            """),
+            {
+                "por_pagina": por_pagina,
+                "offset": offset
+            }
+        )
+
+        avistamientos = resultado.fetchall()
+
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("SELECT COUNT(*) FROM avistamiento")
+        )
+
+        total = resultado.scalar()
+
+    hay_siguiente = offset + por_pagina < total
+
+    return render_template("listado.html", avistamientos=avistamientos, pagina=pagina, hay_siguiente=hay_siguiente)
+
+@app.route("/avistamiento/<int:avistamiento_id>")
+def detalle_avistamiento(avistamiento_id):
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    avistamiento.id,
+                    ave.nombre AS ave,
+                    voluntario.nombre AS voluntario,
+                    avistamiento.lugar,
+                    avistamiento.fecha_hora,
+                    avistamiento.descripcion
+                FROM avistamiento
+                JOIN ave
+                    ON avistamiento.ave_id = ave.id
+                JOIN voluntario
+                    ON avistamiento.voluntario_id = voluntario.id
+                WHERE avistamiento.id = :avistamiento_id
+            """),
+            {"avistamiento_id": avistamiento_id}
+        )
+
+        avistamiento = resultado.fetchone()
+
+        if avistamiento is None:
+            return "Avistamiento no encontrado", 404
+
+        resultado = connection.execute(
+            text("""
+                SELECT ruta_archivo, nombre_archivo
+                FROM registro
+                WHERE avistamiento_id = :avistamiento_id
+                ORDER BY id
+            """),
+            {"avistamiento_id": avistamiento_id}
+        )
+
+        archivos = resultado.fetchall()
+    
+    return render_template("detalle.html", avistamiento=avistamiento, archivos=archivos)
 
 @app.route("/estadisticas")
 def estadisticas():
