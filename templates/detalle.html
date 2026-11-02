@@ -54,6 +54,32 @@
             
             {% endif %}
         {% endfor %}
+        
+        <hr>
+
+        <h2>Comentarios</h2>
+
+        <div id="lista-comentarios">
+            <p>Cargando comentarios...</p>
+        </div>
+
+        <h3>Agregar comentario</h3>
+
+        <div id="mensaje-validacion" hidden></div>
+
+        <form id="form-comentario" data-url="{{ url_for('comentarios', avistamiento_id=avistamiento.id) }}">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" minlength="3" maxlength="50" required>
+            
+            <br><br>
+
+            <label for="texto">Comentario:</label>
+            <textarea id="texto" name="texto" rows="3" cols="40" minlength="5" required></textarea>
+
+            <br></br>
+
+            <button type="submit">Agregar comentario</button>
+        </form>
 
         <br></br>
 
@@ -62,4 +88,5 @@
         </a>
     </div>
 </body>
+<script src="{{ url_for('static', filename='js/comentarios.js') }}"></script>
 </html>

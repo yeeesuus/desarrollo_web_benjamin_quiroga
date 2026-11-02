@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from sqlalchemy import create_engine, text
 from utils import validations
 from werkzeug.utils import secure_filename
@@ -352,6 +352,75 @@ def detalle_avistamiento(avistamiento_id):
 @app.route("/estadisticas")
 def estadisticas():
     return render_template("estadisticas.html")
+
+@app.route("/avistamiento/<int:avistamiento_id>/comentarios", methods=["GET", "POST"])
+def comentarios(avistamiento_id):
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("SELECT id FROM avistamiento WHERE id = :id"),
+            {"id": avistamiento_id}
+        )
+        avistamiento = resultado.fetchone()
+
+    if avistamiento is None:
+        return jsonify({"error": "Avistamiento no encontrado"}), 404
+
+    if request.method == "GET":
+        
+        with engine.connect() as connection:
+            resultado = connection.execute(
+                text("""
+                    SELECT nombre, texto, fecha
+                    FROM comentario
+                    WHERE avistamiento_id = :id
+                    ORDER BY fecha DESC 
+                """),
+                {"id": avistamiento_id}
+            )
+
+            comentarios = resultado.fetchall()
+
+        return jsonify([
+            {
+                "nombre": comentario.nombre,
+                "texto": comentario.texto,
+                "fecha": comentario.fecha.strftime("%d/%m/%Y %H:%M")
+            }
+            for comentario in comentarios
+        ])
+
+    datos = request.get_json(silent=True) or {}
+
+    nombre = datos.get("nombre", "").strip()
+    texto_comentario = datos.get("texto", "").strip()
+
+    errores = []
+
+    if not validations.validate_comentario_nombre(nombre):
+        errores.append("El nombre debe tener entre 3 y 50 caracteres.")
+
+    if not validations.validate_comentario_texto(texto_comentario):
+        errores.append("El comentario debe tener al menos 5 caracteres.")
+
+    if errores:
+        return jsonify({"errores": errores}), 400
+
+    with engine.begin() as connection:
+        resultado = connection.execute(
+            text("""
+                INSERT INTO comentario
+                    (nombre, texto, fecha, avistamiento_id)
+                VALUES
+                    (:nombre, :texto, NOW(), :avistamiento_id)
+            """),
+            {
+                "nombre": nombre,
+                "texto": texto_comentario,
+                "avistamiento_id": avistamiento_id
+            }
+        )
+
+    return jsonify({"mensaje": "Comentario agregado correctamente"}), 201 
 
 if __name__ == "__main__":
     app.run(debug=True)

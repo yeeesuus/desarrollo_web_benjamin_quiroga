@@ -62,3 +62,13 @@ def validate_ave(ave_id):
     if not ave_id:
         return False
     return ave_id.isdigit()
+
+def validate_comentario_nombre(nombre):
+    if not nombre:
+        return False
+    return 3 <= len(nombre.strip()) <= 50
+
+def validate_comentario_texto(texto):
+    if not texto:
+        return False
+    return len(texto.strip()) >= 5
