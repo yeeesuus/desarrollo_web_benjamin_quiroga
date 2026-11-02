@@ -353,6 +353,76 @@ def detalle_avistamiento(avistamiento_id):
 def estadisticas():
     return render_template("estadisticas.html")
 
+@app.route("/estadisticas/datos")
+def datos_estadisticas():
+    with engine.connect() as connection:
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    DATE(fecha_hora) AS fecha,
+                    COUNT(*) AS cantidad
+                FROM avistamiento
+                GROUP BY DATE(fecha_hora)
+                ORDER BY fecha
+            """)
+        )
+
+        avistamientos_dia = [
+            {
+                "fecha": str(fila.fecha),
+                "cantidad": fila.cantidad
+            }
+            for fila in resultado.fetchall()
+        ]
+
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    ave.nombre AS ave,
+                    COUNT(*) AS cantidad
+                FROM avistamiento
+                JOIN ave
+                    ON avistamiento.ave_id = ave_id
+                GROUP BY ave.id, ave.nombre
+                ORDER BY cantidad DESC
+                LIMIT 10
+            """)
+        )
+
+        avistamientos_ave = [
+            {
+                "ave": fila.ave,
+                "cantidad": fila.cantidad
+            }
+            for fila in resultado.fetchall()
+        ]
+
+        resultado = connection.execute(
+            text("""
+                SELECT
+                    comuna.nombre AS comuna,
+                    COUNT(voluntario.id) AS cantidad
+                FROM voluntario
+                JOIN comuna
+                    ON voluntario.comuna_id = comuna.id
+                GROUP BY comuna.id, comuna.nombre
+                ORDER BY cantidad DESC
+            """)
+        )
+
+        voluntarios_comuna = [
+            {
+                "comuna": fila.comuna,
+                "cantidad": fila.cantidad
+            }
+            for fila in resultado.fetchall()
+        ]
+    return jsonify({
+        "avistamientos_dia": avistamientos_dia,
+        "avistamientos_ave": avistamientos_ave,
+        "voluntarios_comuna": voluntarios_comuna
+    })
+
 @app.route("/avistamiento/<int:avistamiento_id>/comentarios", methods=["GET", "POST"])
 def comentarios(avistamiento_id):
     with engine.connect() as connection:

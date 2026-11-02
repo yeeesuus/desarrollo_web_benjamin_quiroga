@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Estadísticas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estadisticas.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
+    
 </head>
 <body>
     <div class="main-container">
         <h1>Estadísticas</h1>
 
-        <h2>Estadísticas de usuarios</h2>
+        <h2>Estadísticas de avistamientos</h2>
 
         <section class="estadistica">
-            <h3>Usuarios registrados por mes</h3>
-            <img src="{{ url_for('static', filename='im/Usuarios registrados por mes (año 2025).png') }}" alt="Gráfico de usuarios registrados por mes (año 2025)">
-        </section>
-
-        <h2>Estadísticas de avistamientos de aves</h2>
-
-        <section class="estadistica">
-            <h3>Avistamientos de aves por tipo</h3>
-            <img src="{{ url_for('static', filename='im/Avistamientos de aves por tipo.png') }}" alt="Gráfico de avistamientos por tipo de ave">
+            <h3>Avistamientos registrados por día</h3>
+            <div id="grafico-dias" style="width: 100%; height: 350px;"></div>
         </section>
 
         <section class="estadistica">
-            <h3>Avistamientos de aves por región</h3>
-            <img src="{{ url_for('static', filename='im/Avistamientos de aves por región.png') }}" alt="Gráfico de avistamientos por región">
+            <h3>Avistamientos por especie de ave</h3>
+            <div id="grafico-aves" style="width: 100%; height: 350px;"></div>
         </section>
 
+        <h2>Estadísticas de voluntarios</h2>
+
         <section class="estadistica">
-            <h3>Avistamientos registrados por mes</h3>
-            <img src="{{ url_for('static', filename='im/Avistamientos de aves por mes (año 2025).png') }}" alt="Gráfico de avistamientos registrados por mes (año 2025)">
+            <h3>Voluntarios registrados por comuna</h3>
+            <div id="grafico-comunas" style="width: 100%; height: 350px;"></div>
         </section>
 
         <a href="{{ url_for('inicio') }}">
             <button type="button">Volver</button>
         </a>
     </div>
+
+    <script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
 </body>
 </html>
