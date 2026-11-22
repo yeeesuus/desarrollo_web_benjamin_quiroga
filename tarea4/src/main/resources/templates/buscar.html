@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar avistamientos</title>
+</head>
+<body>
+    <h1>Buscar avistamientos</h1>
+
+    <input type="text" id="buscador" placeholder="Buscar por ave, voluntario o comuna...">
+
+    <div id="resultados"></div>
+    <script th:src="@{/js/buscar.js}"></script>
+</body>
+</html>
